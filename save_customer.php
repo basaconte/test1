@@ -7,11 +7,18 @@ header('Content-Type: application/json');
 $response = [];
 
 try {
-    $conn = new mysqli(DB_HOST, DB_USERNAME, DB_PASSWORD, DB_NAME);
+    // Data Source Name (DSN)
+    $dsn = "mysql:host=" . DB_HOST . ";dbname=" . DB_NAME . ";charset=utf8mb4";
+    
+    // Opciones de PDO
+    $options = [
+        PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
+        PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+        PDO::ATTR_EMULATE_PREPARES   => false,
+    ];
 
-    if ($conn->connect_error) {
-        throw new Exception('Error de conexión: ' . $conn->connect_error);
-    }
+    // Crear una nueva instancia de PDO
+    $pdo = new PDO($dsn, DB_USERNAME, DB_PASSWORD, $options);
 
     $name = $_POST['name'] ?? '';
     $email = $_POST['email'] ?? '';
@@ -21,17 +28,19 @@ try {
         throw new Exception('Nombre y email son campos obligatorios.');
     }
 
-    $stmt = $conn->prepare("INSERT INTO customers (name, email, phone) VALUES (?, ?, ?)");
-    $stmt->bind_param("sss", $name, $email, $phone);
-
-    if ($stmt->execute()) {
+    $sql = "INSERT INTO customers (name, email, phone) VALUES (?, ?, ?)";
+    $stmt = $pdo->prepare($sql);
+    
+    if ($stmt->execute([$name, $email, $phone])) {
         $response['success'] = true;
     } else {
-        throw new Exception('Error al guardar el cliente: ' . $stmt->error);
+        // Esto es redundante si ERRMODE_EXCEPTION está activado, pero se mantiene por claridad
+        throw new Exception('Error al guardar el cliente.');
     }
 
-    $stmt->close();
-    $conn->close();
+} catch (PDOException $e) {
+    $response['success'] = false;
+    $response['error'] = 'Error de base de datos: ' . $e->getMessage();
 } catch (Exception $e) {
     $response['success'] = false;
     $response['error'] = $e->getMessage();
