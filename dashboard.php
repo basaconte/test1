@@ -31,56 +31,68 @@ unset($pdo);
 <html lang="es">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>Panel de Control</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/framework7@8.3.0/framework7-bundle.min.css">
 </head>
 <body>
-
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="#">Panel de Control</a>
-    <div class="collapse navbar-collapse">
-        <ul class="navbar-nav ml-auto">
-            <li class="nav-item">
-                <span class="navbar-text">Hola, <b><?php echo htmlspecialchars($_SESSION['email']); ?></b></span>
-            </li>
-            <li class="nav-item">
-                <a href="logout.php" class="nav-link">Cerrar Sesión</a>
-            </li>
-        </ul>
+    <div id="app">
+        <div class="view view-main view-init">
+            <div class="page">
+                <div class="navbar">
+                    <div class="navbar-inner">
+                        <div class="title">Panel de Control</div>
+                        <div class="right">
+                            <span class="navbar-text">Hola, <b><?php echo htmlspecialchars($_SESSION['email']); ?></b></span>
+                            <a href="logout.php" class="button button-small button-fill button-round">Cerrar Sesión</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="page-content">
+                    <div class="block-title">Lista de Clientes</div>
+                    <div class="block block-strong no-padding">
+                        <div class="data-table">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th class="label-cell">Nombre</th>
+                                        <th class="label-cell">Email</th>
+                                        <th class="label-cell">Teléfono</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php if (empty($customers)): ?>
+                                        <tr>
+                                            <td colspan="3" class="text-align-center">No hay clientes registrados.</td>
+                                        </tr>
+                                    <?php else: ?>
+                                        <?php foreach ($customers as $customer): ?>
+                                            <tr>
+                                                <td class="label-cell"><?php echo htmlspecialchars($customer['name']); ?></td>
+                                                <td class="label-cell"><?php echo htmlspecialchars($customer['email']); ?></td>
+                                                <td class="label-cell"><?php echo htmlspecialchars($customer['phone']); ?></td>
+                                            </tr>
+                                        <?php endforeach; ?>
+                                    <?php endif; ?>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="block">
+                        <a href="index.html" class="button button-fill button-large">Añadir Nuevo Cliente</a>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-</nav>
 
-<div class="container mt-4">
-    <div class="d-flex justify-content-between align-items-center mb-3">
-        <h2>Lista de Clientes</h2>
-        <a href="index.html" class="btn btn-success">Añadir Nuevo Cliente</a>
-    </div>
-
-    <table class="table table-bordered table-striped">
-        <thead>
-            <tr>
-                <th>Nombre</th>
-                <th>Email</th>
-                <th>Teléfono</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php if (empty($customers)): ?>
-                <tr>
-                    <td colspan="3" class="text-center">No hay clientes registrados.</td>
-                </tr>
-            <?php else: ?>
-                <?php foreach ($customers as $customer): ?>
-                    <tr>
-                        <td><?php echo htmlspecialchars($customer['name']); ?></td>
-                        <td><?php echo htmlspecialchars($customer['email']); ?></td>
-                        <td><?php echo htmlspecialchars($customer['phone']); ?></td>
-                    </tr>
-                <?php endforeach; ?>
-            <?php endif; ?>
-        </tbody>
-    </table>
-</div>
-
+    <script src="https://cdn.jsdelivr.net/npm/framework7@8.3.0/framework7-bundle.min.js"></script>
+    <script>
+        var app = new Framework7({
+            root: '#app',
+            name: 'My App',
+            id: 'com.myapp.test',
+        });
+    </script>
 </body>
 </html>
