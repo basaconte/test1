@@ -2,37 +2,71 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>Inicio de Sesión</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <style>
-        body { background-color: #f7f7f7; }
-        .wrapper { width: 360px; padding: 20px; margin: 100px auto; background: #fff; border-radius: 5px; box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1); }
-    </style>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/framework7@8.3.0/framework7-bundle.min.css">
 </head>
 <body>
-    <div class="wrapper">
-        <h2>Inicio de Sesión</h2>
-        <p>Por favor, introduce tus credenciales para iniciar sesión.</p>
-        <form action="auth.php" method="post">
-            <input type="hidden" name="action" value="login">
-            <div class="form-group">
-                <label>Email</label>
-                <input type="email" name="email" class="form-control" required>
-            </div>    
-            <div class="form-group">
-                <label>Contraseña</label>
-                <input type="password" name="password" class="form-control" required>
-            </div>
-            <div class="form-group">
-                <input type="submit" class="btn btn-primary" value="Iniciar Sesión">
-            </div>
-            <p>¿No tienes una cuenta? <a href="register.php">Regístrate ahora</a>.</p>
-        </form>
+    <div id="app">
+        <div class="view view-main view-init">
+            <div class="page">
+                <div class="navbar">
+                    <div class="navbar-inner">
+                        <div class="title">Inicio de Sesión</div>
+                    </div>
+                </div>
+                <div class="page-content">
+                    <div class="block-title">Por favor, introduce tus credenciales para iniciar sesión.</div>
+                    <form action="auth.php" method="post" class="list form-store-data">
+                        <input type="hidden" name="action" value="login">
+                        <ul>
+                            <li>
+                                <div class="item-content item-input">
+                                    <div class="item-inner">
+                                        <div class="item-title item-label">Email</div>
+                                        <div class="item-input-wrap">
+                                            <input type="email" name="email" placeholder="Tu email" required validate>
+                                            <span class="input-clear-button"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="item-content item-input">
+                                    <div class="item-inner">
+                                        <div class="item-title item-label">Contraseña</div>
+                                        <div class="item-input-wrap">
+                                            <input type="password" name="password" placeholder="Tu contraseña" required validate>
+                                            <span class="input-clear-button"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                        <div class="block block-strong row">
+                            <button type="submit" class="col button button-fill">Iniciar Sesión</button>
+                        </div>
+                        <div class="block-footer">
+                            <p>¿No tienes una cuenta? <a href="register.php">Regístrate ahora</a>.</p>
+                        </div>
+                    </form>
 
-        <hr>
-        <p class="text-center">O inicia sesión con:</p>
-        <a href="social_login.php?provider=Google" class="btn btn-danger btn-block">Iniciar Sesión con Google</a>
+                    <div class="block-title text-align-center">O inicia sesión con:</div>
+                    <div class="block block-strong">
+                        <a href="social_login.php?provider=Google" class="button button-fill button-large color-red">Iniciar Sesión con Google</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
-    </div>    
+    <script src="https://cdn.jsdelivr.net/npm/framework7@8.3.0/framework7-bundle.min.js"></script>
+    <script>
+        var app = new Framework7({
+            root: '#app',
+            name: 'My App',
+            id: 'com.myapp.test',
+        });
+    </script>
 </body>
 </html>

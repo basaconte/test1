@@ -2,32 +2,66 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>Registro de Usuario</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <style>
-        body { background-color: #f7f7f7; }
-        .wrapper { width: 360px; padding: 20px; margin: 100px auto; background: #fff; border-radius: 5px; box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1); }
-    </style>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/framework7@8.3.0/framework7-bundle.min.css">
 </head>
 <body>
-    <div class="wrapper">
-        <h2>Registro</h2>
-        <p>Por favor, completa este formulario para crear una cuenta.</p>
-        <form action="auth.php" method="post">
-            <input type="hidden" name="action" value="register">
-            <div class="form-group">
-                <label>Email</label>
-                <input type="email" name="email" class="form-control" required>
-            </div>    
-            <div class="form-group">
-                <label>Contraseña</label>
-                <input type="password" name="password" class="form-control" required>
+    <div id="app">
+        <div class="view view-main view-init">
+            <div class="page">
+                <div class="navbar">
+                    <div class="navbar-inner">
+                        <div class="title">Registro</div>
+                    </div>
+                </div>
+                <div class="page-content">
+                    <div class="block-title">Por favor, completa este formulario para crear una cuenta.</div>
+                    <form action="auth.php" method="post" class="list form-store-data">
+                        <input type="hidden" name="action" value="register">
+                        <ul>
+                            <li>
+                                <div class="item-content item-input">
+                                    <div class="item-inner">
+                                        <div class="item-title item-label">Email</div>
+                                        <div class="item-input-wrap">
+                                            <input type="email" name="email" placeholder="Tu email" required validate>
+                                            <span class="input-clear-button"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="item-content item-input">
+                                    <div class="item-inner">
+                                        <div class="item-title item-label">Contraseña</div>
+                                        <div class="item-input-wrap">
+                                            <input type="password" name="password" placeholder="Tu contraseña" required validate>
+                                            <span class="input-clear-button"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                        <div class="block block-strong row">
+                            <button type="submit" class="col button button-fill">Registrarse</button>
+                        </div>
+                        <div class="block-footer">
+                            <p>¿Ya tienes una cuenta? <a href="login.php">Inicia sesión aquí</a>.</p>
+                        </div>
+                    </form>
+                </div>
             </div>
-            <div class="form-group">
-                <input type="submit" class="btn btn-primary" value="Registrarse">
-            </div>
-            <p>¿Ya tienes una cuenta? <a href="login.php">Inicia sesión aquí</a>.</p>
-        </form>
-    </div>    
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/framework7@8.3.0/framework7-bundle.min.js"></script>
+    <script>
+        var app = new Framework7({
+            root: '#app',
+            name: 'My App',
+            id: 'com.myapp.test',
+        });
+    </script>
 </body>
 </html>
