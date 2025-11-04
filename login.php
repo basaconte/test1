@@ -28,6 +28,11 @@
             </div>
             <p>¿No tienes una cuenta? <a href="register.php">Regístrate ahora</a>.</p>
         </form>
+
+        <hr>
+        <p class="text-center">O inicia sesión con:</p>
+        <a href="social_login.php?provider=Google" class="btn btn-danger btn-block">Iniciar Sesión con Google</a>
+
     </div>    
 </body>
 </html>
