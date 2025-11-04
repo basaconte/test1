@@ -2,22 +2,76 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>Ficha de Cliente</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/framework7@8.3.0/framework7-bundle.min.css">
 </head>
 <body>
-    <h1>Ficha de Cliente</h1>
-    <form id="customer-form">
-        <label for="name">Nombre:</label><br>
-        <input type="text" id="name" name="name" required><br>
-        <label for="email">Email:</label><br>
-        <input type="email" id="email" name="email" required><br>
-        <label for="phone">Teléfono:</label><br>
-        <input type="tel" id="phone" name="phone"><br><br>
-        <input type="submit" value="Guardar Cliente">
-    </form>
-    <div id="response"></div>
+    <div id="app">
+        <div class="view view-main view-init">
+            <div class="page">
+                <div class="navbar">
+                    <div class="navbar-inner">
+                        <div class="title">Ficha de Cliente</div>
+                    </div>
+                </div>
+                <div class="page-content">
+                    <div class="block-title">Introduce los datos del cliente</div>
+                    <form id="customer-form" class="list form-store-data">
+                        <ul>
+                            <li>
+                                <div class="item-content item-input">
+                                    <div class="item-inner">
+                                        <div class="item-title item-label">Nombre</div>
+                                        <div class="item-input-wrap">
+                                            <input type="text" id="name" name="name" placeholder="Nombre del cliente" required validate>
+                                            <span class="input-clear-button"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="item-content item-input">
+                                    <div class="item-inner">
+                                        <div class="item-title item-label">Email</div>
+                                        <div class="item-input-wrap">
+                                            <input type="email" id="email" name="email" placeholder="Email del cliente" required validate>
+                                            <span class="input-clear-button"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="item-content item-input">
+                                    <div class="item-inner">
+                                        <div class="item-title item-label">Teléfono</div>
+                                        <div class="item-input-wrap">
+                                            <input type="tel" id="phone" name="phone" placeholder="Teléfono del cliente">
+                                            <span class="input-clear-button"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                        <div class="block block-strong row">
+                            <button type="submit" class="col button button-fill">Guardar Cliente</button>
+                        </div>
+                    </form>
+                    <div id="response" class="block-footer"></div>
+                </div>
+            </div>
+        </div>
+    </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/framework7@8.3.0/framework7-bundle.min.js"></script>
+    <script>
+        var app = new Framework7({
+            root: '#app',
+            name: 'My App',
+            id: 'com.myapp.test',
+            // ... other parameters
+        });
+    </script>
     <script src="script.js"></script>
 </body>
 </html>
